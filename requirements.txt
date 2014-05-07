@@ -1,0 +1,9 @@
+Django==1.6.3
+South==0.8.4
+argparse==1.2.1
+ipdb==0.8
+ipython==2.0.0
+openpyxl==1.8.5
+psycopg2==2.5.2
+wsgiref==0.1.2
+xlrd==0.9.3
