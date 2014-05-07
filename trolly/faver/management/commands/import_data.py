@@ -73,7 +73,6 @@ def open_sheet(book):
         return book.sheet_by_name(sheet_name(book))
     return False
 
-
 def print_hours(s, minutes_index):
     """
     test function to print hours
