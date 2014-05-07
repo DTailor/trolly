@@ -11,8 +11,8 @@ class Migration(SchemaMigration):
         # Adding model 'GeoLocation'
         db.create_table(u'faver_geolocation', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('lat', self.gf('django.db.models.fields.CharField')(max_length=10, null=True, blank=True)),
-            ('long', self.gf('django.db.models.fields.CharField')(max_length=10, null=True, blank=True)),
+            ('lat', self.gf('django.db.models.fields.CharField')(max_length=10)),
+            ('long', self.gf('django.db.models.fields.CharField')(max_length=10)),
         ))
         db.send_create_signal(u'faver', ['GeoLocation'])
 
@@ -24,7 +24,7 @@ class Migration(SchemaMigration):
 
         # Adding field 'StationStop.location'
         db.add_column(u'faver_stationstop', 'location',
-                      self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['faver.GeoLocation']),
+                      self.gf('django.db.models.fields.related.ForeignKey')(to=orm['faver.GeoLocation'], null=True, blank=True),
                       keep_default=False)
 
 
@@ -50,8 +50,8 @@ class Migration(SchemaMigration):
         u'faver.geolocation': {
             'Meta': {'object_name': 'GeoLocation'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'lat': ('django.db.models.fields.CharField', [], {'max_length': '10', 'null': 'True', 'blank': 'True'}),
-            'long': ('django.db.models.fields.CharField', [], {'max_length': '10', 'null': 'True', 'blank': 'True'})
+            'lat': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
+            'long': ('django.db.models.fields.CharField', [], {'max_length': '10'})
         },
         u'faver.route': {
             'Meta': {'object_name': 'Route'},
@@ -69,7 +69,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'StationStop'},
             'day_type': ('django.db.models.fields.IntegerField', [], {}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'location': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['faver.GeoLocation']"}),
+            'location': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['faver.GeoLocation']", 'null': 'True', 'blank': 'True'}),
             'order_nr': ('django.db.models.fields.IntegerField', [], {}),
             'station': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['faver.Station']"})
         },

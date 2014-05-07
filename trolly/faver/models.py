@@ -17,11 +17,11 @@ class GeoLocation(models.Model):
     Model representing the geolocation
     of a certain station
     """
-    lat = models.CharField(max_length=10, verbose_name=u'Latitude', blank=True, null=True)
-    long = models.CharField(max_length=10, verbose_name=u'Longitude', blank=True, null=True)
+    lat = models.CharField(max_length=10, verbose_name=u'Latitude')
+    long = models.CharField(max_length=10, verbose_name=u'Longitude')
 
     def __unicode__(self):
-        return unicode("{0} - {1}".format(self.lat, self.long))
+        return "{0} - {1}".format(self.lat, self.long)
 
 
 class StationStop(models.Model):
@@ -30,7 +30,7 @@ class StationStop(models.Model):
     """
     WEEKDAY_CHOICES = ((1,'Mon-Fri'), (2, 'Sat'), (3, 'Sun'))
     station = models.ForeignKey(Station, verbose_name=u'Station')
-    location = models.ForeignKey(GeoLocation, verbose_name=u'Geo Location')
+    location = models.ForeignKey(GeoLocation, verbose_name=u'Geo Location', blank=True, null=True)
     order_nr = models.IntegerField(u'Order number')
     day_type = models.IntegerField(choices=WEEKDAY_CHOICES, verbose_name=u'Weekday Type')
 
