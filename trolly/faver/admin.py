@@ -9,12 +9,13 @@ class RouteAdmin(admin.ModelAdmin):
     pass
 
 class StationStopAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('station', 'order_nr')
+
 
 class StopTimeAdmin(admin.ModelAdmin):
     pass
 
-admin.site.register(Station, StationStopAdmin)
+admin.site.register(Station, StationAdmin)
 admin.site.register(Route, RouteAdmin)
 admin.site.register(StationStop, StationStopAdmin)
 admin.site.register(StopTime, StopTimeAdmin)
