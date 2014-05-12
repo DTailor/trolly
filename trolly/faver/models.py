@@ -17,12 +17,21 @@ class GeoLocation(models.Model):
     Model representing the geolocation
     of a certain station
     """
-    lat = models.CharField(max_length=10, verbose_name=u'Latitude')
-    long = models.CharField(max_length=10, verbose_name=u'Longitude')
+    DIRECTION_TYPE = ((1, 'UPWARD'), (2, 'BACKWARD'))
+    name = models.CharField(max_length=100, verbose_name=u'Station', blank=True, null=True)
+    type = models.IntegerField(choices=DIRECTION_TYPE, verbose_name=u'Direction', blank=True, null=True)
+    lat = models.CharField(max_length=15, verbose_name=u'Latitude')
+    long = models.CharField(max_length=15, verbose_name=u'Longitude')
 
     def __unicode__(self):
+        if(self.name):
+            return "{0} - {1}".format(self.name, self.get_type_display())
         return "{0} - {1}".format(self.lat, self.long)
 
+    def save(self, *args, **kwargs):
+        self.lat = self.lat.replace(',','.')
+        self.long = self.long.replace(',','.')
+        super(GeoLocation, self).save(*args, **kwargs)
 
 class StationStop(models.Model):
     """
