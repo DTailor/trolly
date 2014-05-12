@@ -6,13 +6,13 @@ class StationAdmin(admin.ModelAdmin):
     pass
 
 class GeoLocationAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'type',)
 
 class RouteAdmin(admin.ModelAdmin):
     pass
 
 class StationStopAdmin(admin.ModelAdmin):
-    list_display = ('station', 'order_nr')
+    list_display = ('station', 'location', 'order_nr')
 
 class StopTimeAdmin(admin.ModelAdmin):
     pass
