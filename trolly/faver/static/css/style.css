@@ -1,0 +1,15 @@
+#map {
+    width: 100%;
+    height: 100%;
+}
+.container {
+    background: white;
+    position: relative;
+    z-index: 1;
+    padding: 15px 40px 20px;
+    width: 790px;
+    height: 500px;
+    /* border: 1px solid #dfdfdf; */
+    border-top: 0;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.15);
+}

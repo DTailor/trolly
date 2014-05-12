@@ -2,7 +2,6 @@
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
@@ -58,10 +57,18 @@ USE_I18N = True
 
 USE_L10N = True
 
-
+TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'), )
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
+
+
+
+MEDIA_ROOT = (os.path.join(BASE_DIR, 'faver', 'media'))
+
+MEDIA_URL = '/media/'
+
+STATIC_ROOT = (os.path.join(BASE_DIR, 'faver', 'static'))
 
 STATIC_URL = '/static/'
 

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div id="map"></div>
+{% endblock %}
+
+{% block js_vars %}
+<script>
+    variables['locations'] = "{{ locations|escapejs }}";
+</script>
+{% endblock %}
