@@ -1,16 +1,17 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
+
     <head>
-        <title></title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Trolly</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
         <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
     </head>
     <body>
-        <div class="container">
+        {# <div class="container"> #}
             {% block main %}{% endblock %}
-        </div>
+        {# </div> #}
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
         <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
         <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>

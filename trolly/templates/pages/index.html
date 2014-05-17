@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
 
 {% block main %}
+
+{% csrf_token %}
     <div id="map"></div>
 {% endblock %}
 
 {% block js_vars %}
 <script>
     variables['locations'] = "{{ locations|escapejs }}";
+    variables['get_station_schedule'] = "{% url 'get_station_schedule' %}"
 </script>
 {% endblock %}

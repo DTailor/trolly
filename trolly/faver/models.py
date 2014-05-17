@@ -47,17 +47,6 @@ class StationStop(models.Model):
         return unicode(self.station)
 
 
-class StopTime(models.Model):
-    """
-    Model responsible for holding trolleybus stop times
-    """
-    time = models.DateTimeField()
-    station = models.ForeignKey(StationStop, related_name='stopstime', blank=True, null=True)
-
-    def __unicode__(self):
-        return "{0} - {1}".format(self.time, self.station)
-
-
 class Route(models.Model):
     """
     Model responsible for trolleybus routes
@@ -67,4 +56,14 @@ class Route(models.Model):
 
     def __unicode__(self):
         return unicode(self.nr)
-        
+
+
+class StopTime(models.Model):
+    """
+    Model responsible for holding trolleybus stop times
+    """
+    time = models.DateTimeField()
+    station = models.ForeignKey(StationStop, related_name='stopstime', blank=True, null=True)
+    route = models.ForeignKey(Route, related_name='route', blank=True, null=True)
+    def __unicode__(self):
+        return "{0} - {1}".format(self.time, self.station)
