@@ -2,8 +2,8 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from .models import GeoLocation, StopTime, StationStop
 from django.core import serializers
-import json
 from .utils import get_normalized_time
+import json
 
 
 def index(request):
