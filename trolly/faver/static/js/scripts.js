@@ -23,21 +23,14 @@ $(document).ready(function() {
     var station;
     var markers = [];
     for (var i = 0; i < jsonStations.length; i++) {
-        // debugger
-        // station = jsonStations[i];
-        // console.log(stations[i])
         station = jsonStations[i]
         marker = L.marker([parseFloat(station.fields.lat), parseFloat(station.fields.long)])
             .addTo(map)
-        // .bindPopup(station.fields.name + ' - '+station.fields.lat + ' - ' +station.fields.long)
-        // .openPopup(); 
-        // debugger/
         marker.station_id = station.pk
         marker.id = i;
         marker.on('click', showSchedule)
         markers.push(marker)
     }
-
 
 });
 
@@ -61,7 +54,6 @@ function showSchedule() {
         var data = $.parseJSON(msg);
         var popup = '';
         popup += data.station + "<br />"
-        // var schedule = $.parseJSON(data.schedule)
         var schedule = data.schedule
         for (var i = 0; i < schedule.length; i++) {
             tmp_schedule = schedule[i]
