@@ -1,5 +1,5 @@
-from django.shortcuts import render_to_response
 from django.http import HttpResponse
+from django.shortcuts import render_to_response
 from .models import GeoLocation, StopTime, StationStop
 from django.core import serializers
 import json
