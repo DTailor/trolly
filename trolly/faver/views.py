@@ -45,3 +45,23 @@ def get_station_schedule(request):
             data = json.dumps(data)
             return HttpResponse(data)
     return HttpResponse(status=404)
+
+
+def get_station_minutes_left(request):
+    if request.method == 'GET':
+        geo_id = request.GET.get('station_id', False)
+        if geo_id:
+            geo_point = GeoLocation.objects.get(id=int(geo_id))
+            station_stops = StationStop.objects.filter(location=geo_point)
+            now = get_normalized_time()
+            stop_times = StopTime.objects.filter(
+                station__in=station_stops, time__gte=now).order_by('time')[:10]
+            stop_times_data = []
+            for stop_time in stop_times:
+                minutes_left = (stop_time.time - now).seconds / 60
+                tmp_dict = {stop_time.route.nr: "{0}".format(minutes_left)}
+                stop_times_data.append(tmp_dict)
+            data = {'schedule': stop_times_data, 'station': geo_point.name}
+            data = json.dumps(data)
+            return HttpResponse(data)
+    return HttpResponse(status=404)

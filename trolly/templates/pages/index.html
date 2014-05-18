@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 
 {% block main %}
-
-{% csrf_token %}
     <div id="map"></div>
 {% endblock %}
 
@@ -10,5 +8,6 @@
 <script>
     variables['locations'] = "{{ locations|escapejs }}";
     variables['get_station_schedule'] = "{% url 'get_station_schedule' %}"
+    variables['get_station_minutes_left'] = "{% url 'get_station_minutes_left' %}"
 </script>
 {% endblock %}
