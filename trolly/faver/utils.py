@@ -5,7 +5,7 @@ def get_normalized_time():
     DATE_REPLACE = {
     'year': 2014,
     'month': 5,
-    'day': 7,
+    'day': 15,
     }
     now = datetime.datetime.now()
     n_time = now.replace(year=DATE_REPLACE['year'],
