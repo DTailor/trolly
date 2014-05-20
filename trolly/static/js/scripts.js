@@ -5,7 +5,7 @@ $(document).ready(function() {
     }).addTo(map);
     map.locate({
         setView: true,
-        maxZoom: 16
+        maxZoom: 18
     });
 
     function onLocationFound(e) {
