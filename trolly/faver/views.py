@@ -59,7 +59,8 @@ def get_station_minutes_left(request):
             stop_times_data = []
             for stop_time in stop_times:
                 minutes_left = (stop_time.time - now).seconds / 60
-                tmp_dict = {stop_time.route.nr: "{0}".format(minutes_left)}
+                tmp_dict = {'route': stop_time.route.nr,
+                            'minutes': '{0}'.format(minutes_left)}
                 stop_times_data.append(tmp_dict)
             data = {'schedule': stop_times_data, 'station': geo_point.name}
             data = json.dumps(data)

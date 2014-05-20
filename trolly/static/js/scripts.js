@@ -71,21 +71,10 @@ function showMinutesLeft() {
     });
     request.done(function(msg) {
         var data = $.parseJSON(msg);
-        var popup = '';
-        popup += data.station + "<br />"
-        var schedule = data.schedule
-        for (var i = 0; i < schedule.length; i++) {
-            tmp_schedule = schedule[i]
-            for (var route in tmp_schedule) {
-                if (tmp_schedule[route] === "1") {
-                    tmp_msg = route + " - " + tmp_schedule[route] + " minuta <br />";
-                } else {
-                    tmp_msg = route + " - " + tmp_schedule[route] + " minute <br />";
-                }
-            }
-            popup += tmp_msg;
-        }
-        current_marker.bindPopup(popup).openPopup();
+        var template = $('#station-schedule').html();
+        Mustache.parse(template);   // optional, speeds up future uses
+        var rendered = Mustache.render(template, data);
+        current_marker.bindPopup(rendered).openPopup();
     });
     request.fail(function(jqXHR, textStatus) {
         alert("Request failed: " + textStatus);

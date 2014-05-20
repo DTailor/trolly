@@ -9,5 +9,18 @@
     variables['locations'] = "{{ locations|escapejs }}";
     variables['get_station_schedule'] = "{% url 'get_station_schedule' %}"
     variables['get_station_minutes_left'] = "{% url 'get_station_minutes_left' %}"
+
 </script>
+
+{% verbatim %}
+<script id="station-schedule" type="x-tmpl-mustache">
+<div class="station-block">
+    <div class="name">{{ station }}</div>
+    {{#schedule}}
+        <div class="time-left">{{route}}  -  {{minutes}} minute</div>
+    {{/schedule}}
+</div>
+
+</script>
+{% endverbatim %}
 {% endblock %}
