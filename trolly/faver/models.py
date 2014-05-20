@@ -67,3 +67,19 @@ class StopTime(models.Model):
     route = models.ForeignKey(Route, related_name='route', blank=True, null=True)
     def __unicode__(self):
         return "{0} - {1}".format(self.time, self.station)
+
+
+class WayPoint(models.Model):
+    """
+    Model responsible for holding the waypoints for a certain route
+    """
+    WAYPOINT_TYPE = ((1, 'UPWARD'), (2, 'BACKWARD'))
+    lat = models.CharField(max_length=15, verbose_name=u'Latitude')
+    long = models.CharField(max_length=15, verbose_name=u'Longitude')
+    w_order = models.IntegerField(blank=True, null=True)
+    route = models.ForeignKey(Route, related_name='waypoints')
+    type = models.IntegerField(choices=WAYPOINT_TYPE, verbose_name=u'Direction',
+                                blank=True, null=True)
+
+    def __unicode__(self):
+        return "{0} - {1}, {2}".format(self.route, self.lat, self.long)
