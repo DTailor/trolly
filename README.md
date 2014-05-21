@@ -4,6 +4,22 @@ trolly
 a web-app to help people with trolleybus schedules
 
 
+## Set Up
+
+1.  `git clone https://github.com/DTailor/trolly.git`
+2.  `cd trolly`
+3.  `virtualenv venv`
+4.  `source venv/bin/activate`
+5.  `pip install -r requirements.txt`
+6.  `cp trolly/sample_local_settings.py trolly/local_settings.py`
+7.  Edit database settings and add a [secret key](http://www.miniwebtool.com/django-secret-key-generator/)
+8.  `chmod +x manage.py`
+9.  `./manage.py syncdb`
+10. `./manage.py migrate`
+11. maybe sql dump load
+12. `./manage.py runserver`
+
+
 ## MIT License
 
 Copyright (c) 2014 Dan Croitoru
