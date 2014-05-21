@@ -16,11 +16,19 @@
 <script id="station-schedule" type="x-tmpl-mustache">
 <div class="station-block">
     <div class="name">{{ station }}</div>
-    {{#schedule}}
-        <div class="time-left">Ruta {{route}} in {{minutes}} minute</div>
-    {{/schedule}}
+    <div class="container">
+        <div class="heading">
+             <div class="col">Ruta</div>
+             <div class="col">ETA</div>
+        </div>
+        {{#schedule}}
+        <div class="table-row">
+             <div class="col">{{route}}</div>
+             <div class="col">{{ minutes }}</div>
+        </div>
+        {{/schedule}}
+    </div>
 </div>
-
 </script>
 {% endverbatim %}
 {% endblock %}

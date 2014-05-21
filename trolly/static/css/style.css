@@ -36,3 +36,33 @@ html, body, #map {
     background: #ECF0F1;
     color: #bdc3c7;
 }
+
+.container{
+    display:table;
+    width: 100%;
+    border-collapse: collapse;
+    }
+ .heading{
+     display:table-row;
+     text-align: center;
+     line-height: 25px;
+     font-size: 13px;
+     font-family:georgia;
+     
+ }
+ .table-row{  
+     display:table-row;
+     text-align: center;
+ }
+
+ .table-row:hover {
+    background: #ecf0f1;
+    cursor: pointer;
+ }
+ .col{ 
+    display:table-cell;
+     border: 1px solid gray;
+ }
+ .station-block .name {
+    margin-bottom: 5px;
+ }
