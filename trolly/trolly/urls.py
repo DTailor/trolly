@@ -14,5 +14,10 @@ urlpatterns = patterns('',
                            'faver.views.get_station_minutes_left',
                            name='get_station_minutes_left'),
 
+                       url(r'^route_waypoints/$',
+                           'faver.views.route_waypoints',
+                           name='route_waypoints'),
+
+
                        url(r'^admin/', include(admin.site.urls)),
                        )

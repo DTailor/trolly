@@ -9,6 +9,8 @@
     variables['locations'] = "{{ locations|escapejs }}";
     variables['get_station_schedule'] = "{% url 'get_station_schedule' %}"
     variables['get_station_minutes_left'] = "{% url 'get_station_minutes_left' %}"
+    variables['route_waypoints'] = "{% url 'route_waypoints' %}"
+
 
 </script>
 
@@ -22,7 +24,7 @@
              <div class="col">ETA</div>
         </div>
         {{#schedule}}
-        <div class="table-row">
+        <div class="table-row" data-route='{{ route }}'>
              <div class="col">{{route}}</div>
              <div class="col">{{ minutes }}</div>
         </div>

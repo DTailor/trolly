@@ -1,5 +1,7 @@
+var map;
+var routes = {};
 $(document).ready(function() {
-    var map = L.map('map').setView([47.03160, 28.82177], 13);
+    map = L.map('map').setView([47.03160, 28.82177], 13);
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
@@ -72,9 +74,36 @@ function showMinutesLeft() {
     request.done(function(msg) {
         var data = $.parseJSON(msg);
         var template = $('#station-schedule').html();
-        Mustache.parse(template);   // optional, speeds up future uses
+        Mustache.parse(template); // optional, speeds up future uses
         var rendered = Mustache.render(template, data);
         current_marker.bindPopup(rendered).openPopup();
+        $('.leaflet-popup').on("click", ".table-row", function() {
+            route_name = $(this).attr('data-route')
+            draw_route(route_name);
+        });
+    });
+    request.fail(function(jqXHR, textStatus) {
+        alert("Request failed: " + textStatus);
+    });
+}
+
+function draw_route(route_name) {
+    var request = $.ajax({
+        url: variables['route_waypoints'],
+        type: "GET",
+        data: {
+            route_name: route_name
+        },
+        dataType: "html"
+    });
+    request.done(function(msg) {
+        var data = $.parseJSON(msg);
+        coords = data.coords
+        routes[data['route']] = [{
+            type: "LineString",
+            "coordinates": coords.forward.concat(coords.backward)
+        },];
+        L.geoJson(routes[data['route']]).addTo(map)
     });
     request.fail(function(jqXHR, textStatus) {
         alert("Request failed: " + textStatus);

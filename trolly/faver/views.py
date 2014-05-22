@@ -4,6 +4,7 @@ from .models import GeoLocation, StopTime, StationStop
 from django.core import serializers
 import json
 from .utils import get_normalized_time
+import os
 
 
 def index(request):
@@ -65,4 +66,22 @@ def get_station_minutes_left(request):
             data = {'schedule': stop_times_data, 'station': geo_point.name}
             data = json.dumps(data)
             return HttpResponse(data)
+    return HttpResponse(status=404)
+
+
+def route_waypoints(request):
+    """
+    Returns a json with coords to be draw for a certain
+    route
+    @return - waypoints json
+    """
+    if request.method == 'GET':
+        route = request.GET.get('route_name', False)
+        if route:
+            curr_dir = os.path.dirname(os.path.realpath(__file__))
+            file_path = os.path.join(curr_dir, '..', 'routes_coord', '{0}.json'.format(route))
+            coords = json.loads(open(file_path).read())
+            coords['route'] = route
+            coords = json.dumps(coords)
+            return HttpResponse(coords)
     return HttpResponse(status=404)
