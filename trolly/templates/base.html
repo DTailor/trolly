@@ -12,14 +12,22 @@
     </head>
     <body>
         <div data-role="page" id="index">
-                <div data-theme="b" data-role="header">
-                    <h1>Trolly</h1>
-                </div>
-                
-                <div data-role="content">
-                    {% block main %}{% endblock %}
-                </div>
-            </div>   
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#" class="tab ui-btn-active" data-href="schedule">Harta Statii</a></li>
+                    <li><a href="#" class="tab" data-href="waypoints">Traseu Rute</a></li>
+                </ul>
+            </div><!-- /navbar -->
+
+            <div id="waypoints" data-role="content" class="content_div">
+                {% block waypoint %}{% endblock %}
+            </div>
+            <div id="schedule" data-role="content" class="content_div" style="display: block;">
+                {% block main %}{% endblock %}
+            </div>
+
+           
+        </div>   
 
 
 

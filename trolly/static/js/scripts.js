@@ -109,3 +109,9 @@ function draw_route(route_name) {
         alert("Request failed: " + textStatus);
     });
 }
+
+$(document).delegate('.ui-navbar a', 'click', function () {
+    $(this).addClass('ui-btn-active');
+    $('.content_div').hide();
+    $('#' + $(this).attr('data-href')).show();
+});
