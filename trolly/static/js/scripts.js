@@ -1,5 +1,5 @@
 var map;
-var routes = {};
+var waypoints, route;
 $(document).ready(function() {
     map = L.map('map').setView([47.03160, 28.82177], 13);
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -27,8 +27,30 @@ $(document).ready(function() {
         marker.on('click', showMinutesLeft)
         markers.push(marker)
     }
+    $('#remove-waypoints').on('click', function() {
+        if (typeof waypoints != 'undefined') {
+            map.removeLayer(waypoints);
+        }
+        $('#waypoints .ui-btn-active').removeClass('ui-btn-active')
+        go_schedule_tab();
+    });
+    $('#go-back').on('click', function(){
+        go_schedule_tab();
+    })
+    $('.route-btn').on('click', function() {
+        btn = $(this);
+        $('#waypoints .ui-btn-active').removeClass('ui-btn-active')
+        btn.parent().addClass('ui-btn-active');
+        draw_route(btn.val())
+        go_schedule_tab();
+    });
 });
 var current_marker;
+
+function go_schedule_tab() {
+    $('#schedule_button').removeClass('ui-btn-active')
+    $('#return_map').click();
+}
 
 function showSchedule() {
     current_marker = this;
@@ -99,18 +121,21 @@ function draw_route(route_name) {
     request.done(function(msg) {
         var data = $.parseJSON(msg);
         coords = data.coords
-        routes[data['route']] = [{
+        if (typeof waypoints != 'undefined') {
+            map.removeLayer(waypoints);
+        }
+        route = [{
             type: "LineString",
             "coordinates": coords.forward.concat(coords.backward)
-        },];
-        L.geoJson(routes[data['route']]).addTo(map)
+        }, ];
+        waypoints = L.geoJson(route);
+        waypoints.addTo(map);
     });
     request.fail(function(jqXHR, textStatus) {
         alert("Request failed: " + textStatus);
     });
 }
-
-$(document).delegate('.ui-navbar a', 'click', function () {
+$(document).delegate('.ui-navbar a', 'click', function() {
     $(this).addClass('ui-btn-active');
     $('.content_div').hide();
     $('#' + $(this).attr('data-href')).show();

@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
-from .models import GeoLocation, StopTime, StationStop
+from .models import GeoLocation, StopTime, StationStop, Route
 from django.core import serializers
 import json
 from .utils import get_normalized_time
@@ -10,7 +10,11 @@ import os
 def index(request):
     stations = serializers.serialize(
         'json', GeoLocation.objects.all(), fields=('lat', 'long', 'name'))
-    return render_to_response('pages/index.html', {'locations': stations})
+    routes = Route.objects.all().values_list('nr', flat=True)
+    return render_to_response('pages/index.html', {
+        'locations': stations,
+        'routes': routes
+    })
 
 
 def show_schedule(request):
@@ -79,7 +83,8 @@ def route_waypoints(request):
         route = request.GET.get('route_name', False)
         if route:
             curr_dir = os.path.dirname(os.path.realpath(__file__))
-            file_path = os.path.join(curr_dir, '..', 'routes_coord', '{0}.json'.format(route))
+            file_path = os.path.join(
+                curr_dir, '..', 'routes_coord', '{0}.json'.format(route))
             coords = json.loads(open(file_path).read())
             coords['route'] = route
             coords = json.dumps(coords)

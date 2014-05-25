@@ -69,6 +69,14 @@ html, body, #map {
  .content_div {
     display: none;
 }
-.content_div:first-child {
-    /*display: block;*/
+
+.btn-active {
+    background-color: #2980b9;
+    border-color: #2980b9;
+    color: #fff;
+    text-shadow: #2980b9;
+}
+
+.center-button {
+margin: 0 auto;
 }

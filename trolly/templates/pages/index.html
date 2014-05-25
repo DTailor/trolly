@@ -1,7 +1,29 @@
 {% extends 'base.html' %}
 
-{% block main %}
-    <div id="map"></div>
+
+
+{% block content %}
+<div id="tabs">
+    <div id="waypoints" data-role="content" class="content_div">
+        <div class="ui-grid-b ui-responsive">
+        {% for route in routes %}
+            <input type="button" data-corners="false" data-enhanced="true" value="{{ route }}" class="route-btn">
+        {% endfor %}
+    </div>
+
+<div class="ui-grid-solo">
+    <div class="ui-block-a">
+         <input data-rel="back" type="submit" name="Action" id="go-back" value="Inapoi" data-theme="c"/>
+         <input data-rel="back" type="submit" name="Action" id="remove-waypoints" value="Ascunde traseu" data-theme="c"/>
+    </div>
+</div>
+
+</div>
+    <div id="schedule" data-role="content" class="content_div" style="display: block;">
+        <div id="map"></div>
+    </div>
+</div>
+
 {% endblock %}
 
 {% block js_vars %}

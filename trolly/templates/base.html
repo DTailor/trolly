@@ -14,19 +14,20 @@
         <div data-role="page" id="index">
             <div data-role="navbar">
                 <ul>
-                    <li><a href="#" class="tab ui-btn-active" data-href="schedule">Harta Statii</a></li>
-                    <li><a href="#" class="tab" data-href="waypoints">Traseu Rute</a></li>
+                    <li><a href="#" class="tab" data-href="waypoints" id="schedule_button">Traseu Rute</a></li>
                 </ul>
             </div><!-- /navbar -->
+            <div data-role="navbar" style="display: none;">
+                <ul>
+                    <li><a href="#" class="tab" data-href="schedule" id="return_map"></a></li>
+                </ul>
+            </div><!-- /navbar -->
+            {# Invisible button to simulate back click #}
+            <li style="display: none;" id="schedule-page"><a href="#" class="tab" data-href="schedule">Traseu Rute</a></li>
 
-            <div id="waypoints" data-role="content" class="content_div">
-                {% block waypoint %}{% endblock %}
-            </div>
-            <div id="schedule" data-role="content" class="content_div" style="display: block;">
-                {% block main %}{% endblock %}
-            </div>
+            {% block content %}
+            {% endblock %}
 
-           
         </div>   
 
 
